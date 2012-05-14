@@ -29,7 +29,7 @@ def identify_songs(datetime_obj=datetime.datetime.now(), station=stations[0]):
 
 
 def get_song_length(track_path):
-	song_length = subprocess.check_output('midentify "%s" | grep ID_LENGTH | cut -d"=" -f2' % track_path, shell=True)
+	song_length = subprocess.check_output('midentify.sh "%s" | grep ID_LENGTH | cut -d"=" -f2' % track_path, shell=True)
 	return int(eval(song_length.rstrip()))
 
 
