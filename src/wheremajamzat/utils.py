@@ -7,7 +7,7 @@ import subprocess
 import os
 from bs4 import BeautifulSoup
 
-stations = ['kroq', 'whfs', 'v103']
+stations = ['kroq', 'whfs', 'v103', 'whfs']
 template = 'http://{station}.radio.com/playlist/{year}/{month}/{day}/'
 
 
