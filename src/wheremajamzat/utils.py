@@ -4,6 +4,7 @@ from urllib import urlopen
 import datetime
 import re
 import subprocess
+import os
 from bs4 import BeautifulSoup
 
 stations = ['kroq', 'whfs', 'v103']
@@ -37,6 +38,7 @@ def write_playlist(playlist_path, songs):
 	fp.write('#EXTM3U\n')
 	for song in songs:
 		fp.write('#EXTINF:%d,%s - %s\n' % (get_song_length(song['path']), song['name'], song['artist']))
+		fp.write(song['path']+ '\n')
 	fp.close()
 	return playlist_path
 
@@ -46,4 +48,8 @@ def get_track_name(title, artist):
 
 
 def get_directory_name(station, date):
-	return "%s-%s" % (station, date.strftime('%m-%d-%y'))
+	directory =  "%s-%s" % (station, date.strftime('%m-%d-%y'))
+	dir_path = os.path.abspath(os.path.join(os.path.curdir, directory))
+	if not os.path.exists(dir_path):
+		os.mkdir(dir_path)
+	return dir_path

@@ -131,7 +131,8 @@ def download_songs(download_directory, song_list, aggressive=False):
 	if not aggressive:
 		time.sleep(3)
 	for song in song_list:
-		s = getResultsFromSearch(song)
+		print "Searching for: %s by %s" % (song['title'], song['artist'])
+		s = getResultsFromSearch("%s %s" % (song['title'], song['artist']))
 		stream = getStreamKeyFromSongIDEx(s[0]["SongID"])
 		for k,v in stream["result"].iteritems():
 			stream=v
@@ -146,22 +147,24 @@ def download_songs(download_directory, song_list, aggressive=False):
 			p.wait()
 			try:
 				id3info = ID3(track_path)
-				id3info['TITLE'] = s[songid]["SongName"]
-				id3info['ARTIST'] = s[songid]["ArtistName"]
+				id3info['TITLE'] = title
+				id3info['ARTIST'] = artist
 				id3info.write()
+				print 'ID3 tags written'
 			except InvalidTagError, message:
 				print "Invalid ID3 tag:", message
 		else:
+			print 'File %s already exists' % track_path
 			wait_flag = False
-		if not aggressive:
+		if not aggressive and song != song_list[-1]:
 			if wait_flag:
 				track_length = datetime.timedelta(seconds=get_song_length(track_path))
 				end_time = datetime.datetime.now()
 				to_wait = track_length - (end_time - start_time)
 				to_wait = to_wait.total_seconds() + 2
-			if not wait_lag:
+			if not wait_flag:
 				to_wait = random.randrange(5, 12)
-			print "sleeping for %d seconds" % to_wait
+			print "Sleeping for %d seconds" % to_wait
 			time.sleep(to_wait)
 		songs.append({'path': track_path, 'name': title, 'artist': artist})
 

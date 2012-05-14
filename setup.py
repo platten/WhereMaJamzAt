@@ -5,7 +5,7 @@ import sys
 import glob
 
 sys.path.append('./src')
-from wheremyjamzat.wheremyjamzat import __version__ as wheremyjamzat_version
+from wheremajamzat.wheremajamzat import __version__ as wheremajamzat_version
 
 setup(
 	name         = 'WhereMaJamzAt',
@@ -16,9 +16,9 @@ setup(
 	keywords     = 'download music',
 	url          = 'https://github.com/platten/WhereMaJamzAt/',
 
-	version          = wheremyjamzat_version,
+	version          = wheremajamzat_version,
 	install_requires = ['bs4', 'ID3'],
-	packages         = ['wheremyjamzat'],
-	package_dir      = {'wheremyjamzat': 'src/wheremyjamzat'},
+	packages         = ['wheremajamzat'],
+	package_dir      = {'wheremajamzat': 'src/wheremajamzat'},
 	scripts          = glob.glob("bin/*")
 )

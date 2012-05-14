@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""wheremyjamzat.py: Get those jamz"""
+"""wheremajamzat.py: Get those jamz"""
 
 
 __author__    = "Paul Pietkiewicz"
@@ -19,15 +19,16 @@ from grooveshark import download_songs
 def main():
     """CLI Driver"""
     parser = argparse.ArgumentParser(description='Music downloader and playlist generator', \
-                                     prog='wheremyjamzat.py')
+                                     prog='wheremajamzat.py')
     parser.add_argument('station',
         help='Radio station name', choices=stations)
     now = datetime.datetime.now()
 
-    parser.add_argument('-y', help='Year', action="store", dest="year", type=int, choices=xrange(now.year -2, now.year), default=now.year)
+    parser.add_argument('-y', help='Year', action="store", dest="year", type=int, choices=xrange(now.year -2, now.year+1), default=now.year)
     parser.add_argument('-m', help='Month', action="store", dest="month", type=int, choices=xrange(1, 12), default=now.month)
     parser.add_argument('-d', help='Day', action="store", dest="day", type=int, choices=xrange(1, 31), default=now.day)
     parser.add_argument('-n', help='Number of songs to download', action="store", dest="num_songs", type=int, default=-1)
+    parser.add_argument('-A', help='Agressive downloading (warning, can get you banned)', action="store_true", dest="aggressive")
 
     cli_args = parser.parse_args()
     provided_date = datetime.datetime(year=cli_args.year, month=cli_args.month, day=cli_args.day)
@@ -43,7 +44,7 @@ def main():
     if cli_args.num_songs != -1 and cli_args.num_songs < len(song_list):
 	    song_list = song_list[:cli_args.num_songs]
 
-    downloaded_songs = download_songs(destination_path, song_list)
+    downloaded_songs = download_songs(destination_path, song_list, aggressive=cli_args.aggressive)
     playlist_path = write_playlist(os.path.join(destination_path, 'playlist.m3u'),
         downloaded_songs)
     print "Playlist created: %s" % playlist_path
