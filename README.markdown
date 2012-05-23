@@ -6,11 +6,12 @@ WhereMaJamzAt
 Intro:
 -------
 
-I needed to try out some web scrapping. You see there is this radio I like to listen to. Or at least used to like
-to listen to it... when it was available outside the US, and I thought it might be nice to create a playlist
-of songs so I could "emulate" the experience. Maybe without the useless talk. So this is how WhereMaJamzAt.
+I needed to try out some web scrapping. You see there is this radio station I like to listen to. Or at least
+used to like to listen to it... when it was available outside the US, and I thought it might be nice to create
+a playlist of songs so I could "emulate" the experience. Maybe without the useless talk. So this is how 
+WhereMaJamzAt came into existence.
 
-BTW: I condone piracy, so this is just for educational purposes.
+BTW: I do not condone piracy, so this is just for educational purposes ONLY.
 
 
 Where:
